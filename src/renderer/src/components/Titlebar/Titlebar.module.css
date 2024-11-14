@@ -1,0 +1,40 @@
+.titlebar {
+  position: fixed;
+  width: 100%;
+  -webkit-app-region: drag;
+  z-index: 999;
+  padding: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 5px;
+}
+
+.actions button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  transition: background 200ms ease;
+  padding: 10px;
+  border-radius: 50%;
+  -webkit-app-region: no-drag;
+}
+
+.actions button:hover {
+  opacity: 1;
+  background: #333;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 8px;
+}

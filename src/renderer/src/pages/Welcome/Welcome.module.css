@@ -1,0 +1,83 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+  text-align: center;
+  animation: appear 500ms ease;
+}
+
+.welcome img {
+  width: 100px;
+  height: 100px;
+}
+
+.welcome h1 {
+  font-size: 2.2rem;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 30px;
+}
+
+.buttons button {
+  all: unset;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #0064ff;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  animation: appear 500ms ease;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tool {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 20px;
+  animation: appear 500ms ease;
+}
+
+.tool .status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool .status span {
+  font-size: 26px;
+}
+
+.tool .status[data-type='found'] span {
+  color: #1dd05d;
+}
+
+.tool .status[data-type='notFound'] span {
+  color: red;
+}

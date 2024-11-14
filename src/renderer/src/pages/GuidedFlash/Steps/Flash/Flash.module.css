@@ -1,0 +1,157 @@
+.flash {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+  padding: 50px;
+  animation: appearH 500ms ease;
+}
+
+.step {
+  color: #999;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.flash h1 {
+  font-size: 2.2rem;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons button {
+  all: unset;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #0064ff;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  animation: appear 500ms ease;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: appearH 500ms ease;
+}
+
+.state span {
+  font-size: 32px;
+  color: #1ed760;
+}
+
+.state span[data-type='error'] {
+  color: #ff0000;
+}
+
+.state p {
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 500px;
+}
+
+@keyframes appearH {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logs {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #222;
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 47px;
+  margin-top: 10px;
+}
+
+.log {
+  padding: 2px;
+  animation: appearH 500ms ease;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.log .logStatus {
+  display: flex;
+}
+
+.log .logStatus span {
+  font-size: 26px;
+}
+
+.log .logStatus[data-status='error'] span {
+  color: #ff0000;
+}
+
+.log .logStatus[data-status='success'] span {
+  color: #1ed760;
+}
+
+.log .progress {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 4px;
+  justify-content: flex-end;
+  animation: appearH 500ms ease;
+}
+
+.log .progress .bar {
+  height: 10px;
+  width: 250px;
+  background-color: #222;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.log .progress .bar .fill {
+  height: 100%;
+  background-color: #0064ff;
+  border-radius: 9999px;
+  transition: width 200ms ease;
+}

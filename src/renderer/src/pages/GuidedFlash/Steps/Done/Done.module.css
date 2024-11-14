@@ -1,0 +1,56 @@
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+  text-align: center;
+  animation: appear 500ms ease;
+}
+
+.done img {
+  width: 100px;
+  height: 100px;
+}
+
+.done h1 {
+  font-size: 2.2rem;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 30px;
+  gap: 10px;
+}
+
+.buttons button {
+  all: unset;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #0064ff;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

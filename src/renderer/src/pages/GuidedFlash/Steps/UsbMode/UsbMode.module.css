@@ -1,0 +1,105 @@
+.usbMode {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  gap: 10px;
+  padding: 50px;
+  animation: appearH 500ms ease;
+}
+
+.step {
+  color: #999;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.usbMode h1 {
+  font-size: 2.2rem;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 30px;
+}
+
+.buttons button {
+  all: unset;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background-color: #0064ff;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+  animation: appear 500ms ease;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+.image {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.image img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  gap: 10px;
+  animation: appear 500ms ease;
+  width: 250px;
+  translate: -32px 35px;
+}
+
+.state span {
+  font-size: 4rem;
+  color: #1ed760;
+}
+
+.state span[data-type='error'] {
+  color: #ff0000;
+}
+
+.state p {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+@keyframes appearH {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

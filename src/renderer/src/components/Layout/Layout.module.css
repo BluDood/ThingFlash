@@ -1,0 +1,10 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.outlet {
+  flex: 1;
+  overflow: hidden;
+}
