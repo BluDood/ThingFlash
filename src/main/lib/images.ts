@@ -84,7 +84,7 @@ async function getThingifyImagePath() {
 
   await execAsync(`tar -xf "${tempPath}" -C "${extractPath}"`)
 
-  fs.unlinkSync(tempPath)
+  fs.rmSync(tempPath)
 
   log(`Extracted ${nameWithoutExt} and cleaned up`, 'images')
 

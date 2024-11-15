@@ -40,7 +40,8 @@ export async function downloadTool() {
   const userDataPath = app.getPath('userData')
   const toolFolderPath = path.join(userDataPath, 'superbird-tool')
 
-  if (fs.existsSync(toolFolderPath)) fs.unlinkSync(toolFolderPath)
+  if (fs.existsSync(toolFolderPath))
+    fs.rmSync(toolFolderPath, { recursive: true })
 
   const downloadPath = path.join(app.getPath('temp'), 'superbird-tool.zip')
 
@@ -64,7 +65,7 @@ export async function downloadTool() {
 
   await execAsync(`tar -xf "${downloadPath}" -C "${toolFolderPath}"`)
 
-  fs.unlinkSync(downloadPath)
+  fs.rmSync(downloadPath)
 
   log('Extracted and cleaned up', 'superbird-tool')
 
