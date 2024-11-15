@@ -99,8 +99,8 @@ jobs:
           name: thingflash-linux-artifact
           path: |
             ./dist/thingflash-*.AppImage
-            ./dist/thingflash-*.deb
-            ./dist/thingflash-*.snap
+            ./dist/thingflash*.deb
+            ./dist/thingflash*.snap
 
       - name: Upload the zip to the GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
@@ -108,5 +108,5 @@ jobs:
         with:
           files: |
             ./dist/thingflash-*.AppImage
-            ./dist/thingflash-*.deb
-            ./dist/thingflash-*.snap
+            ./dist/thingflash*.deb
+            ./dist/thingflash*.snap
