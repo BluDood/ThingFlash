@@ -33,6 +33,12 @@ jobs:
       - name: Build the project
         run: npm run build:win
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thingflash-windows-artifact
+          path: ./dist/thingflash-*-setup.exe
+
       - name: Upload the zip to the GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
         uses: softprops/action-gh-release@v2
@@ -57,6 +63,12 @@ jobs:
       - name: Build the project
         run: npm run build:mac
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thingflash-macos-artifact
+          path: ./dist/thingflash-*.dmg
+
       - name: Upload the zip to the GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
         uses: softprops/action-gh-release@v2
@@ -80,6 +92,15 @@ jobs:
 
       - name: Build the project
         run: npm run build:linux
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thingflash-linux-artifact
+          path: |
+            ./dist/thingflash-*.AppImage
+            ./dist/thingflash-*.deb
+            ./dist/thingflash-*.snap
 
       - name: Upload the zip to the GitHub Release
         if: github.event_name == 'release' && github.event.action == 'created'
