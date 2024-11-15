@@ -82,7 +82,7 @@ async function getThingifyImagePath() {
 
   fs.mkdirSync(extractPath, { recursive: true })
 
-  await execAsync(`tar -xf ${tempPath} -C "${extractPath}"`)
+  await execAsync(`tar -xf "${tempPath}" -C "${extractPath}"`)
 
   fs.unlinkSync(tempPath)
 
@@ -174,7 +174,7 @@ async function getLocalImagePath() {
 
   fs.mkdirSync(extractPath, { recursive: true })
 
-  await execAsync(`tar -xf ${imagePath} -C "${extractPath}"`)
+  await execAsync(`tar -xf "${imagePath}" -C "${extractPath}"`)
 
   log(`Extracted local image ${nameWithoutExt}`, 'images')
 

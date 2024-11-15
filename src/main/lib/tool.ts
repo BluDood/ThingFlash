@@ -62,7 +62,7 @@ export async function downloadTool() {
 
   fs.mkdirSync(toolFolderPath)
 
-  await execAsync(`tar -xf ${downloadPath} -C "${toolFolderPath}"`)
+  await execAsync(`tar -xf "${downloadPath}" -C "${toolFolderPath}"`)
 
   fs.unlinkSync(downloadPath)
 
@@ -80,7 +80,7 @@ export async function runTool(args: string) {
 
   log(`Running tool with args: ${args}`, 'superbird-tool')
 
-  const res = await execAsync(`${toolPath} ${args}`)
+  const res = await execAsync(`"${toolPath}" ${args}`)
 
   return res
 }
@@ -94,7 +94,7 @@ export function spawnTool(args: string) {
 
   log(`Spawning tool with args: ${args}`, 'superbird-tool')
 
-  const cmd = spawn(`${toolPath} ${args}`, { shell: true })
+  const cmd = spawn(`"${toolPath}" ${args}`, { shell: true })
 
   return cmd
 }
