@@ -158,7 +158,7 @@ async function getLocalImagePath() {
   const imagePath = path.join(
     app.getPath('userData'),
     'localImages',
-    nameWithoutExt
+    name
   )
 
   if (!fs.existsSync(imagePath))
