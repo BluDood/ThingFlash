@@ -3,7 +3,7 @@ import axios from 'axios'
 import path from 'path'
 import fs from 'fs'
 
-import { execAsync, log, LogLevel } from './utils.js'
+import { log, LogLevel, unzip } from './utils.js'
 
 const current = {
   provider: '',
@@ -82,7 +82,7 @@ async function getThingifyImagePath() {
 
   fs.mkdirSync(extractPath, { recursive: true })
 
-  await execAsync(`tar -xf "${tempPath}" -C "${extractPath}"`)
+  await unzip(tempPath, extractPath)
 
   fs.rmSync(tempPath)
 
@@ -155,11 +155,7 @@ async function getLocalImagePath() {
   const name = path.basename(current.image)
   const nameWithoutExt = name.split('.').slice(0, -1).join('.')
 
-  const imagePath = path.join(
-    app.getPath('userData'),
-    'localImages',
-    name
-  )
+  const imagePath = path.join(app.getPath('userData'), 'localImages', name)
 
   if (!fs.existsSync(imagePath))
     return log(`Local image ${name} not found`, 'images', LogLevel.ERROR)
@@ -174,7 +170,7 @@ async function getLocalImagePath() {
 
   fs.mkdirSync(extractPath, { recursive: true })
 
-  await execAsync(`tar -xf "${imagePath}" -C "${extractPath}"`)
+  await unzip(imagePath, extractPath)
 
   log(`Extracted local image ${nameWithoutExt}`, 'images')
 

@@ -51,3 +51,19 @@ export function log(text: string, scope?: string, level = LogLevel.INFO) {
   console.log(log)
   fs.appendFileSync(logPath, log + '\n')
 }
+
+const unzipCommands = {
+  darwin: (src: string, dst: string) =>
+    execAsync(`unzip -o "${src}" -d "${dst}"`),
+  win32: (src: string, dst: string) =>
+    execAsync(`tar -xf "${src}" -C "${dst}"`),
+  linux: (src: string, dst: string) =>
+    execAsync(`unzip -o "${src}" -d "${dst}"`)
+}
+
+export async function unzip(zipPath: string, destPath: string) {
+  const cmd = unzipCommands[process.platform]
+  if (!cmd) throw new Error('Unsupported platform')
+
+  return cmd(zipPath, destPath)
+}

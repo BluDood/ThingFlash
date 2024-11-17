@@ -4,7 +4,7 @@ import axios from 'axios'
 import path from 'path'
 import fs from 'fs'
 
-import { execAsync, log } from './utils.js'
+import { execAsync, log, unzip } from './utils.js'
 
 const platforms = {
   darwin: {
@@ -63,7 +63,7 @@ export async function downloadTool() {
 
   fs.mkdirSync(toolFolderPath)
 
-  await execAsync(`tar -xf "${downloadPath}" -C "${toolFolderPath}"`)
+  await unzip(downloadPath, toolFolderPath)
 
   fs.rmSync(downloadPath)
 
