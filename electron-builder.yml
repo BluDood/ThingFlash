@@ -34,7 +34,6 @@ dmg:
 linux:
   target:
     - AppImage
-    - snap
     - deb
   maintainer: BluDood
   category: Utility
