@@ -3,9 +3,12 @@ import '@electron-toolkit/preload'
 import { contextBridge, ipcRenderer } from 'electron'
 
 enum IPCHandler {
-  CheckTool = 'checkTool',
-  DownloadTool = 'downloadTool',
+  CheckSuperbirdTool = 'checkTool',
+  DownloadSuperbirdTool = 'downloadTool',
   FindCarThing = 'findCarThing',
+  FindDevice = 'findDevice',
+  CheckDriver = 'checkDriver',
+  InstallDriver = 'installDriver',
   SetImage = 'setImage',
   GetLocalImages = 'getLocalImages',
   AddLocalImage = 'addLocalImage',
@@ -21,9 +24,14 @@ const api = {
 
     return () => ipcRenderer.removeListener(channel, _listener)
   },
-  checkTool: () => ipcRenderer.invoke(IPCHandler.CheckTool),
-  downloadTool: () => ipcRenderer.invoke(IPCHandler.DownloadTool),
+  checkSuperbirdTool: () =>
+    ipcRenderer.invoke(IPCHandler.CheckSuperbirdTool),
+  downloadSuperbirdTool: () =>
+    ipcRenderer.invoke(IPCHandler.DownloadSuperbirdTool),
   findCarThing: () => ipcRenderer.invoke(IPCHandler.FindCarThing),
+  findDevice: () => ipcRenderer.invoke(IPCHandler.FindDevice),
+  checkDriver: () => ipcRenderer.invoke(IPCHandler.CheckDriver),
+  installDriver: () => ipcRenderer.invoke(IPCHandler.InstallDriver),
   setImage: (provider: string, image: string) =>
     ipcRenderer.invoke(IPCHandler.SetImage, provider, image),
   getLocalImages: () => ipcRenderer.invoke(IPCHandler.GetLocalImages),

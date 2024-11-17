@@ -3,7 +3,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { join } from 'path'
 
-import { checkTool, downloadTool, runTool, spawnTool } from './lib/tool.js'
+import superbird from './lib/superbird.js'
+import libwdi from './lib/libwdi.js'
 import {
   addLocalImage,
   cleanupImages,
@@ -95,9 +96,12 @@ app.on('before-quit', async e => {
 })
 
 enum IPCHandler {
-  CheckTool = 'checkTool',
-  DownloadTool = 'downloadTool',
+  CheckSuperbirdTool = 'checkTool',
+  DownloadSuperbirdTool = 'downloadTool',
   FindCarThing = 'findCarThing',
+  FindDevice = 'findDevice',
+  CheckDriver = 'checkDriver',
+  InstallDriver = 'installDriver',
   SetImage = 'setImage',
   GetLocalImages = 'getLocalImages',
   AddLocalImage = 'addLocalImage',
@@ -106,19 +110,41 @@ enum IPCHandler {
 }
 
 async function setupIpcHandlers() {
-  ipcMain.handle(IPCHandler.CheckTool, async () => {
-    const res = await checkTool()
+  ipcMain.handle(IPCHandler.CheckSuperbirdTool, async () => {
+    const res = await superbird.checkTool()
     return res
   })
 
-  ipcMain.handle(IPCHandler.DownloadTool, async () => {
-    const res = await downloadTool()
+  ipcMain.handle(IPCHandler.DownloadSuperbirdTool, async () => {
+    const res = await superbird.downloadTool()
     return res
   })
 
   ipcMain.handle(IPCHandler.FindCarThing, async () => {
-    const res = await runTool('--find_device')
+    const res = await superbird.runTool('--find_device')
     return res.includes('Found device booted in USB')
+  })
+
+  ipcMain.handle(IPCHandler.FindDevice, async () => {
+    const res = await libwdi
+      .runTool('--find_device GX-CHIP')
+      .catch(() => false)
+    return res !== false
+  })
+
+  ipcMain.handle(IPCHandler.CheckDriver, async () => {
+    const res = await libwdi
+      .runTool('--check_driver GX-CHIP libusbK')
+      .catch(() => false)
+    return res !== false
+  })
+
+  ipcMain.handle(IPCHandler.InstallDriver, async () => {
+    const res = await libwdi
+      .runToolAdmin('--install_driver GX-CHIP libusbK')
+      .catch(() => false)
+
+    return res !== false
   })
 
   ipcMain.handle(
@@ -159,7 +185,9 @@ async function setupIpcHandlers() {
       }
     })
 
-    const burnRes = await runTool('--burn_mode').catch(() => null)
+    const burnRes = await superbird
+      .runTool('--burn_mode')
+      .catch(() => null)
 
     if (!burnRes) {
       sendStatus({
@@ -257,7 +285,7 @@ async function setupIpcHandlers() {
       })
     }
 
-    const cmd = spawnTool(`--restore_device ${path}`)
+    const cmd = superbird.spawnTool(`--restore_device ${path}`)
 
     let currentPartition = ''
 
@@ -331,7 +359,7 @@ async function setupIpcHandlers() {
           status: 'pending'
         }
       })
-      await runTool('--continue_boot')
+      await superbird.runTool('--continue_boot')
       sendStatus({
         type: 'log',
         data: {

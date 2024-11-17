@@ -15,14 +15,14 @@ const Welcome: React.FC = () => {
   >('loading')
 
   useEffect(() => {
-    window.api.checkTool().then((found: boolean) => {
+    window.api.checkSuperbirdTool().then((found: boolean) => {
       setToolStatus(found ? 'found' : 'notFound')
     })
   }, [])
 
   async function downloadTool() {
     setToolStatus('downloading')
-    await window.api.downloadTool()
+    await window.api.downloadSuperbirdTool()
     setToolStatus('found')
   }
 

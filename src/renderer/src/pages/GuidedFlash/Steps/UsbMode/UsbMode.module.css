@@ -103,3 +103,19 @@
     transform: translateY(0);
   }
 }
+
+.note {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 40px;
+  color: #aaa;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: 200ms ease;
+}
+
+.note[data-shown='true'] {
+  opacity: 1;
+  transform: translateX(0);
+}
